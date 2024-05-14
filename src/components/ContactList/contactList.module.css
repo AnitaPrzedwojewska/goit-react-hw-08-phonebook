@@ -1,0 +1,27 @@
+.Contacts {
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: none;
+}
+
+.Contact {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DeleteButton {
+  padding: .25em 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.Info {
+  font-style: italic;
+  font-size: smaller;
+}
