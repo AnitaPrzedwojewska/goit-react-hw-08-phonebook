@@ -1,0 +1,14 @@
+.contact {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteButton {
+  padding: .25em 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+  cursor: pointer;
+  margin-left: 10px;
+}

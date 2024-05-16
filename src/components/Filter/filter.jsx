@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+
+import css from './Filter.module.css';
+
 import { nanoid } from 'nanoid';
-import css from './filter.module.css';
 import { setFilter } from '../../redux/filtersSlice';
 import { getFilter } from '../../redux/selectors';
 
-export const Filter = () => {
+const Filter = () => {
   const dispatch = useDispatch();
 
   const searchInputId = nanoid();
@@ -23,3 +25,5 @@ export const Filter = () => {
     </>
   );
 };
+
+export default Filter;

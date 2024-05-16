@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
 import './App.css';
-// import { INITIAL_FILTER } from "./constants/initial-contacts-state";
-import { ContactForm } from "./components/ContactForm/contactForm";
-import { Filter } from "./components/Filter/filter";
-import { ContactList } from "./components/ContactList/contactList";
+import ContactForm from "./components/ContactForm/ContactForm";
+import Filter from "./components/Filter/Filter";
+import ContactList from "./components/ContactList/ContactList";
+
 import { getContacts } from './redux/selectors';
 import { saveContacts } from "./store/localStorage";
 
@@ -15,9 +16,6 @@ function App() {
   useEffect(() => {
     saveContacts(contacts);
   }, [contacts]);
-
-  // console.log('App - contacts: ', contacts);
-  // console.log('App - filter: ', filter);
 
   return (
     <>

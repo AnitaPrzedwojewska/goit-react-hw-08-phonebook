@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import css from './contactForm.module.css';
+
+import css from './ContactForm.module.css';
+
 import { regexpName, regexpPhone } from '../../constants/regexps';
 import { getContacts } from '../../redux/selectors';
 import { addContact } from '../../redux/contactsSlice';
 
-export const ContactForm = () => {
+const ContactForm = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
@@ -83,3 +85,5 @@ export const ContactForm = () => {
     </form>
   );
 }
+
+export default ContactForm;
