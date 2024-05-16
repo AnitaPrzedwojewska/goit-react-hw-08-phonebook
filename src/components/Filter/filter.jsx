@@ -1,8 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import css from './filter.module.css';
-import { PropTypes } from 'prop-types';
+import { setFilter } from '../../redux/filtersSlice';
+import { getFilter } from '../../redux/selectors';
 
-export const Filter = ({ filter, onFilterChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
 
   const searchInputId = nanoid();
 
@@ -13,15 +16,10 @@ export const Filter = ({ filter, onFilterChange }) => {
         className={css.filterInput}
         type='input'
         name='filter'
+        value={useSelector(getFilter)}
         id={searchInputId}
-        value={filter}
         placeholder='enter part of the name'
-        onChange={onFilterChange}></input>
+        onChange={()=> dispatch(setFilter(event.target.value))}></input>
     </>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onFilterChange: PropTypes.func.isRequired
 };

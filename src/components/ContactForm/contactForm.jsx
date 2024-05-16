@@ -1,20 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import css from './contactForm.module.css';
-import PropTypes from 'prop-types';
+import { regexpName, regexpPhone } from '../../constants/regexps';
+import { getContacts } from '../../redux/selectors';
+import { addContact } from '../../redux/contactsSlice';
 
-export const ContactForm = ({ onFormSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
 
-  const regexpName = new RegExp(
-    "^[a-zA-Z]+(([' -][a-zA-Z])?[a-zA-Z]*)*$"
-  );
-  const regexpNumber = new RegExp("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$");
+  const contacts = useSelector(getContacts);
 
-  const submitContact = (event) => {
+  const handleSubmitContact = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
-    const number = event.target.number.value;
-    if (name.trim() === '' || number.trim() === "") {
-      alert("Name and number must be completed");
+    const phone = event.target.phone.value;
+    if (name.trim() === "" || phone.trim() === "") {
+      alert("Name and phone must be completed");
       return;
     }
     if (!regexpName.test(name)) {
@@ -23,22 +24,31 @@ export const ContactForm = ({ onFormSubmit }) => {
       );
       return;
     }
-    if (!regexpNumber.test(number)) {
+    if (!regexpPhone.test(phone)) {
       alert(
-        "The number is not correct. Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        "The phone is not correct. Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
       );
-    return;
+      return;
     }
-    const newContact = { id: nanoid(), name, number };
-    console.log('submitContact - newContact: ', newContact);
-    onFormSubmit(newContact);
+    const newContact = { id: nanoid(), name, phone };
+    console.log("handleSubmitContact - newContact: ", newContact);
+    // if exists already the contact
+    const existContact = contacts.find(
+      (contact) => contact.name === newContact.name
+    );
+
+    if (existContact) {
+      alert(`${newContact.name} is already in your contacts!`);
+      return;
+    }
+    dispatch(addContact(newContact));
     event.currentTarget.reset();
   }
 
   const nameInputId = nanoid();
-  const numberInputId = nanoid();
+  const phoneInputId = nanoid();
   return (
-    <form className={css.newContactForm} onSubmit={submitContact}>
+    <form className={css.newContactForm} onSubmit={handleSubmitContact}>
       <div className={css.FormPair}>
         <label className={css.FormLabel} htmlFor={nameInputId}>
           Name:
@@ -49,24 +59,20 @@ export const ContactForm = ({ onFormSubmit }) => {
           name='name'
           id={nameInputId}
           placeholder='enter the name'
-          // pattern="^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          // pattern="^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
       </div>
       <div className={css.FormPair}>
-        <label className={css.FormLabel} htmlFor={numberInputId}>
-          Number:
+        <label className={css.FormLabel} htmlFor={phoneInputId}>
+          Phone:
         </label>
         <input
           className={css.FormInput}
           type='tel'
-          name='number'
-          id={numberInputId}
+          name='phone'
+          id={phoneInputId}
           placeholder='enter the phone number'
-          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          // pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"
           title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
           required
         />
@@ -77,7 +83,3 @@ export const ContactForm = ({ onFormSubmit }) => {
     </form>
   );
 }
-
-ContactForm.propTypes = {
-  onFormSubmit: PropTypes.func
-};
