@@ -1,5 +1,12 @@
-.filterInput {
-  width: 180px;
+.filter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.input {
+  width: 75%;
   padding: 2px 5px;
   border-radius: 5px;
 }

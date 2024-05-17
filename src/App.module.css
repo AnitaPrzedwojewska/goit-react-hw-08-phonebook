@@ -1,0 +1,12 @@
+.container {
+  display: inline-block;
+  width: 100%;
+  background-color: white;
+  padding: 32px 24px;
+  border-radius: 12px;
+}
+@media screen and (min-width: 480px) {
+  .container {
+    width: 480px;
+  }
+}

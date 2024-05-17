@@ -48,3 +48,9 @@ const sampleContacts = [
 export const filterInitialState = "";
 
 export const contactsInitialState = loadContacts() || sampleContacts;
+
+export const statusAppInitialState = {
+  adding: false,
+  searching: false,
+  editing: false,
+};

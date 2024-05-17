@@ -2,7 +2,30 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 6px;
+  border-bottom: 1px dotted gray;
+}
+
+.pair {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+@media screen and (min-width: 480px) {
+  .pair {
+    flex-direction: row;
+  }
+}
+
+.name {
+  display: block;
+
+}
+@media screen and (min-width: 480px) {
+  .name {
+    width: 65%;
+  }
 }
 
 .deleteButton {

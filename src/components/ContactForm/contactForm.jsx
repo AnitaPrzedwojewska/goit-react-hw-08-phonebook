@@ -2,10 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import css from './ContactForm.module.css';
+import Button from '../Button/Button';
+import Icon from '../Icon/Icon';
+import okIcon from '../../assets/ok-icon.svg';
+import noIcon from '../../assets/no-icon.svg';
 
 import { regexpName, regexpPhone } from '../../constants/regexps';
 import { getContacts } from '../../redux/selectors';
 import { addContact } from '../../redux/contactsSlice';
+import { setAdding } from '../../redux/statusAppSlice';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -45,18 +50,23 @@ const ContactForm = () => {
     }
     dispatch(addContact(newContact));
     event.currentTarget.reset();
+    dispatch(setAdding(false));
+  }
+
+  const handleCancel = () => {
+    dispatch(setAdding(false));
   }
 
   const nameInputId = nanoid();
   const phoneInputId = nanoid();
   return (
-    <form className={css.newContactForm} onSubmit={handleSubmitContact}>
-      <div className={css.FormPair}>
-        <label className={css.FormLabel} htmlFor={nameInputId}>
+    <form className={css.form} onSubmit={handleSubmitContact}>
+      <div className={css.pair}>
+        <label className={css.label} htmlFor={nameInputId}>
           Name:
         </label>
         <input
-          className={css.FormInput}
+          className={css.input}
           type='text'
           name='name'
           id={nameInputId}
@@ -65,12 +75,12 @@ const ContactForm = () => {
           required
         />
       </div>
-      <div className={css.FormPair}>
-        <label className={css.FormLabel} htmlFor={phoneInputId}>
+      <div className={css.pair}>
+        <label className={css.label} htmlFor={phoneInputId}>
           Phone:
         </label>
         <input
-          className={css.FormInput}
+          className={css.input}
           type='tel'
           name='phone'
           id={phoneInputId}
@@ -79,9 +89,16 @@ const ContactForm = () => {
           required
         />
       </div>
-      <button className={css.FormButton} type='submit'>
-        Add contact
-      </button>
+      <div className={css.buttons}>
+        <Button className={css.button} type='submit'>
+          <Icon src={okIcon} size='24' />
+          Add
+        </Button>
+        <Button className={css.button} onClick={handleCancel}>
+          <Icon src={noIcon} size='24' />
+          Cancel
+        </Button>
+      </div>
     </form>
   );
 }

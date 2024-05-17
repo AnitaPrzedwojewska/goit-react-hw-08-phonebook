@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: flex-end;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid gray;
+}
+
+.title {
+  font-size: 32px;
+}

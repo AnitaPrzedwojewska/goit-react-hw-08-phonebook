@@ -11,7 +11,11 @@ const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
+  console.log('ContactList - contacts', contacts);
+
   const filteredContacts = filterContacts(contacts, filter);
+
+  console.log("ContactList - filteredContacts", filteredContacts);
 
   return (
     <>
@@ -20,7 +24,7 @@ const ContactList = () => {
       ) : (
         <ul className={css.Contacts}>
           {filteredContacts.map(({ id, name, phone }) => (
-            <Contact key={id} name={name} phone={phone} />
+            <Contact key={id} id={id} name={name} phone={phone} />
           ))}
         </ul>
       )}
