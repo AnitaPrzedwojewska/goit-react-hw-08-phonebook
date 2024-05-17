@@ -12,11 +12,8 @@ const Contact = ({id, name, phone}) => {
   const dispatch = useDispatch();
 
   const handleDeleteContact = (id) => {
-    console.log('handleDeleteContact - id: ', id);
     dispatch(deleteContact(id))
   }
-
-  console.log('Contact - id: ', id);
 
   return (
     <li className={css.contact} key={id}>
@@ -37,7 +34,7 @@ const Contact = ({id, name, phone}) => {
 }
 
 Contact.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   name: PropTypes.string,
   phone: PropTypes.string
 }

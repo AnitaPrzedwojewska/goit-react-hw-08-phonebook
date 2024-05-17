@@ -2,17 +2,14 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import css from './App.module.css';
+import Header from './components/Header/Header';
 import ContactForm from "./components/ContactForm/ContactForm";
-// import Subheading from './components/Subheading/Subheading';
-// import Button from './components/Button/Button';
-// import Icon from './components/Icon/Icon';
-// import searchIcon from './assets/search-icon.svg';
 import Filter from "./components/Filter/Filter";
 import ContactList from "./components/ContactList/ContactList";
 
 import { getStatusApp, getContacts } from "./redux/selectors";
 import { saveContacts } from "./store/localStorage";
-import Header from './components/Header/Header';
+import { sortContacts } from "./utils/sortContacts";
 
 function App() {
 
@@ -20,7 +17,8 @@ function App() {
   const contacts = useSelector(getContacts);
 
   useEffect(() => {
-    saveContacts(contacts);
+    const sortedContacts = sortContacts(contacts);
+    saveContacts(sortedContacts);
   }, [contacts]);
 
   return (

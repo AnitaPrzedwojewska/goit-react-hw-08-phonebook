@@ -11,11 +11,7 @@ const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  console.log('ContactList - contacts', contacts);
-
   const filteredContacts = filterContacts(contacts, filter);
-
-  console.log("ContactList - filteredContacts", filteredContacts);
 
   return (
     <>
