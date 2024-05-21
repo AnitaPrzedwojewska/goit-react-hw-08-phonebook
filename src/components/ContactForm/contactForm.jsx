@@ -9,13 +9,13 @@ import noIcon from '../../assets/no-icon.svg';
 
 import { regexpName, regexpPhone } from '../../constants/regexps';
 import { getContacts } from '../../redux/selectors';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operation';
 import { setAdding } from '../../redux/statusAppSlice';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(getContacts);
+  const { contacts } = useSelector(getContacts);
 
   const handleSubmitContact = (event) => {
     event.preventDefault();
@@ -39,7 +39,7 @@ const ContactForm = () => {
     }
     const newContact = { id: nanoid(), name, phone };
     console.log("handleSubmitContact - newContact: ", newContact);
-    // if exists already the contact
+    // check if exists already the contact
     const existContact = contacts.find(
       (contact) => contact.name === newContact.name
     );

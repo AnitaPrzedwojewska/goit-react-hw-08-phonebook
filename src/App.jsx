@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import css from './App.module.css';
 import Header from './components/Header/Header';
@@ -8,18 +8,23 @@ import Filter from "./components/Filter/Filter";
 import ContactList from "./components/ContactList/ContactList";
 
 import { getStatusApp, getContacts } from "./redux/selectors";
-import { saveContacts } from "./store/localStorage";
-import { sortContacts } from "./utils/sortContacts";
+import { fetchContacts } from './redux/operation';
+// import { sortContacts } from "./utils/sortContacts";
 
 function App() {
 
   const {adding} = useSelector(getStatusApp);
-  const contacts = useSelector(getContacts);
+  const { isLoading, error } = useSelector(getContacts);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const sortedContacts = sortContacts(contacts);
-    saveContacts(sortedContacts);
-  }, [contacts]);
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   const sortedContacts = sortContacts(contacts);
+  // }, [contacts]);
 
   return (
     <div className={css.container}>
@@ -31,6 +36,7 @@ function App() {
           <Icon src={searchIcon} size="24" />
         </Button>
       </Subheading> */}
+      {isLoading && !error && <p>Request in progress...</p>}
       <Filter />
       <ContactList />
     </div>

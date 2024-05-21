@@ -6,7 +6,7 @@ import Button from '../../Button/Button';
 import Icon from '../../Icon/Icon';
 import deleteIcon from '../../../assets/delete-icon.svg';
 
-import { deleteContact } from '../../../redux/contactsSlice';
+import { deleteContact } from '../../../redux/operation';
 
 const Contact = ({id, name, phone}) => {
   const dispatch = useDispatch();
