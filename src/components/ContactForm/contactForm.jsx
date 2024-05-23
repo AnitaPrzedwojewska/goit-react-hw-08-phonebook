@@ -37,8 +37,9 @@ const ContactForm = () => {
       );
       return;
     }
-    const newContact = { id: nanoid(), name, phone };
-    console.log("handleSubmitContact - newContact: ", newContact);
+    const createdAt = new Date().toISOString();
+    const newContact = { id: nanoid(), createdAt, name, phone };
+    // console.log("handleSubmitContact - newContact: ", newContact);
     // check if exists already the contact
     const existContact = contacts.find(
       (contact) => contact.name === newContact.name

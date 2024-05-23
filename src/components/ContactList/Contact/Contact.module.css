@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   align-items: flex-end;
   padding-bottom: 6px;
   border-bottom: 1px dotted gray;
@@ -10,11 +11,13 @@
 .pair {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  /* width: 90%; */
 }
 @media screen and (min-width: 480px) {
   .pair {
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 

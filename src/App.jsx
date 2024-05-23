@@ -13,7 +13,7 @@ import { fetchContacts } from './redux/operation';
 
 function App() {
 
-  const {adding} = useSelector(getStatusApp);
+  const { adding } = useSelector(getStatusApp);
   const { isLoading, error } = useSelector(getContacts);
 
   const dispatch = useDispatch();
