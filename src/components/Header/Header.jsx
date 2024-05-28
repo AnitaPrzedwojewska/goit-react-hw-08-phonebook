@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import css from "./Header.module.css";
+import addIcon from "../../assets/add-icon.svg";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
-import addIcon from "../../assets/add-icon.svg";
+import css from "./Header.module.css";
 
-import { setAdding } from "../../redux/statusAppSlice";
-import { getStatusApp } from "../../redux/selectors";
+import { getStatusApp } from "../../redux/statusApp/selectors";
+import { setAdding } from "../../redux/statusApp/statusAppSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,14 +14,16 @@ const Header = () => {
 
   const handleOnAddContact = () => {
     dispatch(setAdding(true));
-  }
+  };
 
   return (
     <div className={css.header}>
       <h1 className={css.title}>Phonebook</h1>
-      {!adding && <Button onClick={handleOnAddContact}>
-        <Icon className={CSS.addIcon} src={addIcon} size='32' />
-      </Button>}
+      {!adding && (
+        <Button onClick={handleOnAddContact}>
+          <Icon className={CSS.addIcon} src={addIcon} size='32' />
+        </Button>
+      )}
     </div>
   );
 };

@@ -1,19 +1,19 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import PropTypes from 'prop-types';
-import css from './Contact.module.css';
-import Button from '../../Button/Button';
-import Icon from '../../Icon/Icon';
-import deleteIcon from '../../../assets/delete-icon.svg';
+import PropTypes from "prop-types";
+import deleteIcon from "../../../assets/delete-icon.svg";
+import Button from "../../Button/Button";
+import Icon from "../../Icon/Icon";
+import css from "./Contact.module.css";
 
-import { deleteContact } from '../../../redux/operation';
+import { deleteContact } from "../../../redux/contacts/operation";
 
-const Contact = ({id, name, phone}) => {
+const Contact = ({ id, name, phone }) => {
   const dispatch = useDispatch();
 
   const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id))
-  }
+    dispatch(deleteContact(id));
+  };
 
   return (
     <li className={css.contact} key={id}>
@@ -31,12 +31,12 @@ const Contact = ({id, name, phone}) => {
       </Button>
     </li>
   );
-}
+};
 
 Contact.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
-  phone: PropTypes.string
-}
+  phone: PropTypes.string,
+};
 
 export default Contact;

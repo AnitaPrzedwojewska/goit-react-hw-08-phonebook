@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
 
-import css from './ContactForm.module.css';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
-import okIcon from '../../assets/ok-icon.svg';
-import noIcon from '../../assets/no-icon.svg';
+import noIcon from "../../assets/no-icon.svg";
+import okIcon from "../../assets/ok-icon.svg";
+import Button from "../Button/Button";
+import Icon from "../Icon/Icon";
+import css from "./ContactForm.module.css";
 
-import { regexpName, regexpPhone } from '../../constants/regexps';
-import { getContacts } from '../../redux/selectors';
-import { addContact } from '../../redux/operation';
-import { setAdding } from '../../redux/statusAppSlice';
+import { regexpName, regexpPhone } from "../../constants/regexps";
+import { getContacts } from "../../redux/contacts/selectors";
+import { addContact } from "../../redux/contacts/operation";
+import { setAdding } from "../../redux/statusApp/statusAppSlice";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -52,11 +52,11 @@ const ContactForm = () => {
     dispatch(addContact(newContact));
     event.currentTarget.reset();
     dispatch(setAdding(false));
-  }
+  };
 
   const handleCancel = () => {
     dispatch(setAdding(false));
-  }
+  };
 
   const nameInputId = nanoid();
   const phoneInputId = nanoid();
@@ -102,6 +102,6 @@ const ContactForm = () => {
       </div>
     </form>
   );
-}
+};
 
 export default ContactForm;

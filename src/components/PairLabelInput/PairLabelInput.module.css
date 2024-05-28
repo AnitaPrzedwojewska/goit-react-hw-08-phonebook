@@ -1,0 +1,4 @@
+.pair {
+  display: flex;
+  flex-direction: column;
+}

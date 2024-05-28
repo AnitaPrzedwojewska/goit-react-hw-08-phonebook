@@ -1,46 +1,44 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+// import { ChakraProvider } from '@chakra-ui/react';
 
-import css from './App.module.css';
-import Header from './components/Header/Header';
-import ContactForm from "./components/ContactForm/ContactForm";
-import Filter from "./components/Filter/Filter";
-import ContactList from "./components/ContactList/ContactList";
-
-import { getStatusApp, getContacts } from "./redux/selectors";
-import { fetchContacts } from './redux/operation';
-// import { sortContacts } from "./utils/sortContacts";
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
+import Layout from "./pages/Layout/Layout";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import ContactsPage from './pages/ContactsPage/ContactsPage';
 
 function App() {
 
-  const { adding } = useSelector(getStatusApp);
-  const { isLoading, error } = useSelector(getContacts);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   const sortedContacts = sortContacts(contacts);
-  // }, [contacts]);
-
-  return (
-    <div className={css.container}>
-      <Header />
-      {adding && <ContactForm />}
-      {/* <Subheading>
-        <h2 className={css.subheading}>Contacts</h2>
-        <Button>
-          <Icon src={searchIcon} size="24" />
-        </Button>
-      </Subheading> */}
-      {isLoading && !error && <p>Request in progress...</p>}
-      <Filter />
-      <ContactList />
-    </div>
-  );
+return (
+  // <ChakraProvider>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route
+          path='/login'
+          element={
+            <RestrictedRoute redirectTo='/contacts' component={<LoginPage />} />
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <RestrictedRoute
+              redirectTo='/contacts'
+              component={<RegisterPage />}
+            />
+          }
+        />
+        <Route
+          path='/contacts'
+          element={
+            <PrivateRoute redirectTo='/login' component={<ContactsPage />} />
+          }
+        />
+      </Route>
+    </Routes>
+  // </ChakraProvider>
+);
 }
 
 export default App

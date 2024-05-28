@@ -7,9 +7,10 @@ import Icon from "../Icon/Icon";
 import css from "./Filter.module.css";
 
 import { nanoid } from "nanoid";
-import { getFilter, getStatusApp } from "../../redux/selectors";
-import { setFilter } from "../../redux/filtersSlice";
-import { setSearching } from "../../redux/statusAppSlice";
+import { getFilter } from "../../redux/filters/selectors";
+import { setFilter } from "../../redux/filters/filtersSlice";
+import { getStatusApp } from "../../redux/statusApp/selectors";
+import { setSearching } from "../../redux/statusApp/statusAppSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Filter = () => {
 
   const handleOffSearching = () => {
     dispatch(setSearching(false));
-    dispatch(setFilter(''));
+    dispatch(setFilter(""));
   };
 
   const handleOnSearching = () => {
