@@ -18,18 +18,11 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const login = form.elements.login.value;
-    const password = form.elements.password.value;
-    console.log(
-      "LoginForm - handleSubmit - login/password: ",
-      login,
-      "/",
-      password
-    );
+
     dispatch(
       logIn({
-        login: login,
-        password: password,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
       })
     );
     form.reset();
@@ -39,20 +32,21 @@ const LoginForm = () => {
     <>
       <Form className={css.form} onSubmit={handleSubmit}>
         <PairLabelInput>
-          <Label htmlFor='login'>Login</Label>
-          <Input id='login' name='login'></Input>
+          <Label htmlFor='email'>Email</Label>
+          <Input type='email' id='email' name='email'></Input>
         </PairLabelInput>
         <PairLabelInput>
           <Label htmlFor='password'>Password</Label>
-          <Input id='password' name='password'></Input>
+          <Input type='password' id='password' name='password'></Input>
         </PairLabelInput>
         <div className={css.buttons}>
-          <Button type='submit'>Login</Button>
+          <Button type='submit'>Log in</Button>
         </div>
       </Form>
       <div>
         <p>
-          If you do not have an account yet, click <NavLink to='/register'>here</NavLink>.
+          If you do not have an account yet, click{" "}
+          <NavLink to='/register'>here</NavLink>.
         </p>
       </div>
     </>
