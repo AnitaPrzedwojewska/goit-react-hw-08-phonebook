@@ -1,0 +1,10 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve">
+
+ <g class="layer">
+  <title>Layer 1</title>
+  <g fill="none" fill-rule="nonzero" id="svg_1" stroke-miterlimit="10" stroke-width="0" transform="matrix(2.81 0 0 2.81 0 0)">
+   <circle cx="45.5" cy="45.5" fill="rgb(32,196,203)" fill-rule="nonzero" id="svg_2" r="45" stroke-miterlimit="10"/>
+   <path d="m51.67,45.78c6.36,-2.52 10.88,-8.72 10.88,-15.97c0,-9.47 -7.7,-17.18 -17.18,-17.18s-17.18,7.71 -17.18,17.18c0,7.28 4.54,13.49 10.94,16c-8.57,0.79 -15.3,8.01 -15.3,16.78l0,9.82c0,1.66 1.35,3 3,3l37.55,0c1.66,0 3,-1.34 3,-3l0,-9.82c0,-8.91 -6.95,-16.21 -15.71,-16.81z" fill="rgb(255,255,255)" fill-rule="nonzero" id="svg_4" stroke-miterlimit="10"/>
+  </g>
+ </g>
+</svg>

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
 import Filter from "../../components/Filter/Filter";
-import css from "./ContactsPage.module.css";
+// import css from "./ContactsPage.module.css";
 
 import { fetchContacts } from "../../redux/contacts/operation";
 import { getContacts } from "../../redux/contacts/selectors";
@@ -28,10 +28,12 @@ const ContactsPage = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>Register</title>
-      </Helmet>
-      <div className={css.container}>
+      <HelmetProvider>
+        <Helmet>
+          <title>Phonebook - My contacts</title>
+        </Helmet>
+      </HelmetProvider>
+      <div>
         {adding && <ContactForm />}
         {/* <Subheading>
         <h2 className={css.subheading}>Contacts</h2>

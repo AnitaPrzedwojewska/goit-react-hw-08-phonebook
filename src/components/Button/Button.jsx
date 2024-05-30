@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import css from './Button.module.css';
 
-const Button = ({ children, type='button', onClick }) => {
+const Button = ({ children, type='button', onClick=null }) => {
   return (
     <button className={css.button} type={type} onClick={onClick ? onClick : null}>
       {children}

@@ -1,16 +1,12 @@
 import PropTypes from "prop-types";
 import css from "./Input.module.css";
 
-const Input = ({ id, name, children }) => {
-  return (
-    <input className={css.input} id={id} name={name}>
-      {children}
-    </input>
-  );
+const Input = ({type='text', id, name }) => {
+  return <input className={css.input} type={type} id={id} name={name} />;
 };
 
 Input.propTypes = {
-  children: PropTypes.node.isRequired,
+  type: PropTypes.string,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

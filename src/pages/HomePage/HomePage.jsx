@@ -1,18 +1,17 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-import LoginForm from "../../components/LoginForm/LoginForm";
-
-const LoginPage = () => {
+const HomePage = () => {
   return (
     <div>
       <HelmetProvider>
         <Helmet>
-          <title>Phonebook - Login</title>
+          <title>Phonebook</title>
         </Helmet>
       </HelmetProvider>
-      <LoginForm />
+      <p>Welcome to the Phonebook App.</p>
+      <p></p>
     </div>
   );
 };
 
-export default LoginPage;
+export default HomePage;

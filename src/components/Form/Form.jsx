@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
 import css from "./Form.module.css";
 
-const Form = ({ children }) => {
+const Form = ({ onSubmit, children }) => {
   return (
-    <form className={css.form}>
+    <form className={css.form} onSubmit={onSubmit}>
       {children}
     </form>
   )
 }
 
 Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 }
 
