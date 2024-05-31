@@ -17,7 +17,7 @@ import { getStatusApp } from "../../redux/statusApp/selectors";
 // import { sortContacts } from "./utils/sortContacts";
 
 const ContactsPage = () => {
-  const { adding } = useSelector(getStatusApp);
+  const { adding, editing } = useSelector(getStatusApp);
   const { isLoading, error } = useSelector(getContacts);
 
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const ContactsPage = () => {
             </Button>
           )}
         </div>
-        {adding && <ContactForm />}
+        {(adding || editing) && <ContactForm />}
         {/* <Subheading>
         <h2 className={css.subheading}>Contacts</h2>
         <Button>

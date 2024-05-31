@@ -1,4 +1,4 @@
-// import { nanoid } from "nanoid";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import noIcon from "../../assets/no-icon.svg";
@@ -7,43 +7,53 @@ import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import css from "./ContactForm.module.css";
 
-// import { regexpName, regexpPhone } from "../../constants/regexps";
+import { addContact, editContact } from "../../redux/contacts/operation";
 import { getContacts } from "../../redux/contacts/selectors";
-import { addContact } from "../../redux/contacts/operation";
-import { setAdding } from "../../redux/statusApp/statusAppSlice";
+import { getStatusApp } from "../../redux/statusApp/selectors";
+import { setAdding, setEditing } from "../../redux/statusApp/statusAppSlice";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-
   const { contacts } = useSelector(getContacts);
+  const { editing } = useSelector(getStatusApp);
+
+  const currentContact = editing ? contacts.find(
+      (contact) => contact.id === editing
+    ) : { id: null, name: '', number: '' };
+
+  const [name, setName] = useState(currentContact.name);
+  const [number, setNumber] = useState(currentContact.number);
 
   const handleSubmitContact = (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const number = event.target.number.value;
-    console.log('name / number : ', name, ' / ', number);
     if (name.trim() === "" || number.trim() === "") {
       alert("Name and phone number must be completed");
       return;
     }
-    const existContact = contacts.find(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
-    );
-    if (existContact) {
-      alert(`${name} is already in your contacts!`);
-      return;
+    if (editing) {
+      dispatch(
+        editContact({ id: currentContact.id, name: name, number: number })
+      );
+      dispatch(setEditing(null));
     }
-    dispatch(addContact({name:name, number:number}));
+    else {
+      const existContact = contacts.find(
+        (contact) => contact.name.toLowerCase() === name.toLowerCase()
+      );
+      if (existContact) {
+        alert(`${name} is already in your contacts!`);
+        return;
+      }
+      dispatch(addContact({ name: name, number: number }));
+      dispatch(setAdding(false));
+    }
     event.currentTarget.reset();
-    dispatch(setAdding(false));
   };
 
   const handleCancel = () => {
     dispatch(setAdding(false));
   };
 
-  // const nameInputId = nanoid();
-  // const numberInputId = nanoid();
   return (
     <form className={css.form} onSubmit={handleSubmitContact}>
       <div className={css.pair}>
@@ -55,6 +65,8 @@ const ContactForm = () => {
           type='text'
           name='name'
           id='name'
+          value={name}
+          onChange={(event) => setName(event.target.value)}
           placeholder='enter the name'
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -69,16 +81,24 @@ const ContactForm = () => {
           type='tel'
           name='number'
           id='number'
+          value={number}
+          onChange={(event) => setNumber(event.target.value)}
           placeholder='enter the phone number'
           title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
           required
         />
       </div>
       <div className={css.buttons}>
-        <Button className={css.button} type='submit'>
-          <Icon src={okIcon} size='24' />
-          Add
-        </Button>
+        {editing ?
+          <Button className={css.button} type='submit'>
+            <Icon src={okIcon} size='24' />
+            Save
+          </Button>
+          :
+          <Button className={css.button} type='submit'>
+            <Icon src={okIcon} size='24' />
+            Add
+          </Button>}
         <Button className={css.button} onClick={handleCancel}>
           <Icon src={noIcon} size='24' />
           Cancel

@@ -19,8 +19,8 @@ const ContactList = () => {
         <p className={css.Info}>There are no matching contacts</p>
       ) : (
         <ul className={css.Contacts}>
-          {filteredContacts.map(({ id, name, phone }) => (
-            <Contact key={id} id={id} name={name} phone={phone} />
+          {filteredContacts.map(({ id, name, number }) => (
+            <Contact key={id} id={id} name={name} number={number} />
           ))}
         </ul>
       )}
