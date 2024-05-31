@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 
 import noIcon from "../../assets/no-icon.svg";
@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import css from "./ContactForm.module.css";
 
-import { regexpName, regexpPhone } from "../../constants/regexps";
+// import { regexpName, regexpPhone } from "../../constants/regexps";
 import { getContacts } from "../../redux/contacts/selectors";
 import { addContact } from "../../redux/contacts/operation";
 import { setAdding } from "../../redux/statusApp/statusAppSlice";
@@ -20,36 +20,20 @@ const ContactForm = () => {
   const handleSubmitContact = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
-    const phone = event.target.phone.value;
-    if (name.trim() === "" || phone.trim() === "") {
-      alert("Name and phone must be completed");
+    const number = event.target.number.value;
+    console.log('name / number : ', name, ' / ', number);
+    if (name.trim() === "" || number.trim() === "") {
+      alert("Name and phone number must be completed");
       return;
     }
-    if (!regexpName.test(name)) {
-      alert(
-        "The name is not correct. Name may contain only letters, apostrophe, dash and spaces."
-      );
-      return;
-    }
-    if (!regexpPhone.test(phone)) {
-      alert(
-        "The phone is not correct. Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-      );
-      return;
-    }
-    const createdAt = new Date().toISOString();
-    const newContact = { id: nanoid(), createdAt, name, phone };
-    // console.log("handleSubmitContact - newContact: ", newContact);
-    // check if exists already the contact
     const existContact = contacts.find(
-      (contact) => contact.name === newContact.name
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
-
     if (existContact) {
-      alert(`${newContact.name} is already in your contacts!`);
+      alert(`${name} is already in your contacts!`);
       return;
     }
-    dispatch(addContact(newContact));
+    dispatch(addContact({name:name, number:number}));
     event.currentTarget.reset();
     dispatch(setAdding(false));
   };
@@ -58,33 +42,33 @@ const ContactForm = () => {
     dispatch(setAdding(false));
   };
 
-  const nameInputId = nanoid();
-  const phoneInputId = nanoid();
+  // const nameInputId = nanoid();
+  // const numberInputId = nanoid();
   return (
     <form className={css.form} onSubmit={handleSubmitContact}>
       <div className={css.pair}>
-        <label className={css.label} htmlFor={nameInputId}>
+        <label className={css.label} htmlFor='name'>
           Name:
         </label>
         <input
           className={css.input}
           type='text'
           name='name'
-          id={nameInputId}
+          id='name'
           placeholder='enter the name'
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
       </div>
       <div className={css.pair}>
-        <label className={css.label} htmlFor={phoneInputId}>
-          Phone:
+        <label className={css.label} htmlFor='number'>
+          Phone number:
         </label>
         <input
           className={css.input}
           type='tel'
-          name='phone'
-          id={phoneInputId}
+          name='number'
+          id='number'
           placeholder='enter the phone number'
           title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
           required

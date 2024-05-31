@@ -1,4 +1,5 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Heading } from '@chakra-ui/react';
 
 const HomePage = () => {
   return (
@@ -8,7 +9,7 @@ const HomePage = () => {
           <title>Phonebook</title>
         </Helmet>
       </HelmetProvider>
-      <p>Welcome to the Phonebook App.</p>
+      <Heading>Welcome to the Phonebook App.</Heading>
       <p></p>
     </div>
   );

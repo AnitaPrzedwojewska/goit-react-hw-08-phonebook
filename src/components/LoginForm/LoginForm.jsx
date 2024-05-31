@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { Input } from "@chakra-ui/react";
+import { Input, Button } from "@chakra-ui/react";
 
 import css from "./LoginForm.module.css";
 // import Modal from '../Modal/Modal';
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 import Form from "../Form/Form";
 // import Input from "../Input/Input";
 import Label from "../Label/Label";

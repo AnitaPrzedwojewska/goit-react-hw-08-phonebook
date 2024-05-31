@@ -6,9 +6,13 @@ import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
 import Filter from "../../components/Filter/Filter";
 // import css from "./ContactsPage.module.css";
+import Button from "../../components/Button/Button";
+import Icon from "../../components/Icon/Icon";
+import addIcon from "../../assets/add-icon.svg";
 
 import { fetchContacts } from "../../redux/contacts/operation";
 import { getContacts } from "../../redux/contacts/selectors";
+import { setAdding } from "../../redux/statusApp/statusAppSlice";
 import { getStatusApp } from "../../redux/statusApp/selectors";
 // import { sortContacts } from "./utils/sortContacts";
 
@@ -26,6 +30,10 @@ const ContactsPage = () => {
   //   const sortedContacts = sortContacts(contacts);
   // }, [contacts]);
 
+  const handleOnAddContact = () => {
+    dispatch(setAdding(true));
+  };
+
   return (
     <div>
       <HelmetProvider>
@@ -34,6 +42,14 @@ const ContactsPage = () => {
         </Helmet>
       </HelmetProvider>
       <div>
+        <div>
+          <h2>My contacts</h2>
+          {!adding && (
+            <Button onClick={handleOnAddContact}>
+              <Icon className={CSS.addIcon} src={addIcon} size='32' />
+            </Button>
+          )}
+        </div>
         {adding && <ContactForm />}
         {/* <Subheading>
         <h2 className={css.subheading}>Contacts</h2>
