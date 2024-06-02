@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <div className={css.header}>
-      <NavLink to='/'>
+      <NavLink className={css.link} to='/'>
         <h1 className={css.title}>Phonebook</h1>
       </NavLink>
       <UserMenu />

@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-// import Modal from "../Modal/Modal";
-import Form from "../Form/Form";
-import PairLabelInput from "../PairLabelInput/PairLabelInput";
-import Label from "../Label/Label";
-import Input from "../Input/Input";
+import noIcon from "../../assets/no-icon.svg";
+import okIcon from "../../assets/ok-icon.svg";
 import Button from "../Button/Button";
+import Icon from "../Icon/Icon";
+import css from "./RegisterForm.module.css";
 
-import { register } from '../../redux/auth/operation';
+import { register } from "../../redux/auth/operation";
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -28,40 +28,51 @@ const RegisterForm = () => {
   };
 
   return (
-    // <Modal>
-    <Form onSubmit={handleSubmit}>
-      <PairLabelInput>
-        <Label htmlFor='name'>Name</Label>
-        <Input type='text' id='name' name='name' />
-      </PairLabelInput>
-      <PairLabelInput>
-        <Label htmlFor='email'>Email</Label>
-        <Input type='email' id='email' name='email' />
-      </PairLabelInput>
-      <PairLabelInput>
-        <Label htmlFor='password'>Password</Label>
-        <Input type='password' id='password' name='password' />
-      </PairLabelInput>
+    <>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.pair}>
+          <label className={css.label} htmlFor='name'>
+            Name
+          </label>
+          <input className={css.input} type='text' id='name' name='name' />
+        </div>
+        <div className={css.pair}>
+          <label className={css.label} htmlFor='email'>
+            Email
+          </label>
+          <input className={css.input} type='email' id='email' name='email' />
+        </div>
+        <div className={css.pair}>
+          <label className={css.label} htmlFor='password'>
+            Password
+          </label>
+          <input
+            className={css.input}
+            type='password'
+            id='password'
+            name='password'
+          />
+        </div>
+        <div className={css.buttons}>
+          <NavLink className={css.link} to='/'>
+            <Button className={css.button}>
+              <Icon src={noIcon} size='24' />
+              Cancel
+            </Button>
+          </NavLink>
+          <Button className={css.button} type='submit'>
+            <Icon src={okIcon} size='24' />
+            Register
+          </Button>
+        </div>
+      </form>
       <div>
-        <Button type='submit'>Register</Button>
+        <p>
+          If you already have an account, click{" "}
+          <NavLink to='/login'>here</NavLink>.
+        </p>
       </div>
-      {/* <div>
-        <label htmlFor='name'>Name</label>
-        <input type='text' id='name' name='name' />
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input type='email' id='email' name='email' />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input type='password' id='password' name='password' />
-      </div>
-      <div>
-        <button type='submit'>Register</button>
-      </div> */}
-    </Form>
-    // </Modal>
+    </>
   );
 };
 

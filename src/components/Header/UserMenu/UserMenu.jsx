@@ -1,16 +1,14 @@
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 
 import loginIcon from "../../../assets/login-icon.svg";
-// import logoutIcon from "../../../assets/logout-icon.svg";
+import logoutIcon from "../../../assets/logout-icon.svg";
 import Button from "../../Button/Button";
 import Icon from "../../Icon/Icon";
+import css from "./UserMenu.module.css";
 
 import useAuth from "../../../hooks/useAuth";
-import { logOut } from '../../../redux/auth/operation';
-
-import { IconButton } from '@chakra-ui/react';
-import { TbLogout2 } from "react-icons/tb";
+import { logOut } from "../../../redux/auth/operation";
 
 const UserMenu = () => {
   const { user, isLoggedIn } = useAuth();
@@ -18,37 +16,27 @@ const UserMenu = () => {
   const dispatch = useDispatch();
 
   const handleLogOutClick = () => {
-    dispatch(
-      logOut()
-    )
-  }
+    dispatch(logOut());
+  };
 
   return (
     <div>
       {isLoggedIn ? (
-        <>
-          <p>{user.email}</p>
-          <NavLink to='/'>
-            <IconButton
-                isRound={true}
-                variant='solid'
-                colorScheme='teal'
-                aria-label='Done'
-                fontSize='20px'
-                icon={<TbLogout2 />}
-                onClick={handleLogOutClick}
-              />
-              Log out
-            {/* <Button onClick={handleLogOutClick}>
-              <Icon src={logoutIcon} size='24'></Icon>Log out
-            </Button> */}
+        <div className={css.menu}>
+          <p>Hi, {user.name}</p>
+          <NavLink className={css.link} to='/'>
+            <Button onClick={handleLogOutClick}>
+              {/* Logout */}
+              <Icon src={logoutIcon} size='32'></Icon>
+            </Button>
           </NavLink>
-        </>
+        </div>
       ) : (
         <>
-          <NavLink to='/login'>
+          <NavLink className={css.link} to='/login'>
             <Button>
-              <Icon src={loginIcon} size='24'></Icon>Log in
+              {/* Login */}
+              <Icon src={loginIcon} size='32'></Icon>
             </Button>
           </NavLink>
         </>

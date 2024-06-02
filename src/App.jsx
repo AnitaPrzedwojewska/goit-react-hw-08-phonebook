@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+// import { ChakraProvider } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -11,7 +11,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   return (
-    <ChakraProvider>
+    // <ChakraProvider>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -41,7 +41,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </ChakraProvider>
+    // </ChakraProvider>
   );
 }
 

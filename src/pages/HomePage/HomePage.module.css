@@ -1,0 +1,15 @@
+.home {
+  padding: 36px 12px;
+  text-align: center;
+}
+
+.title {
+  display: block;
+  margin-bottom: 24px;
+  color: rgb(85, 44, 84);
+}
+
+.text {
+  display: block;
+  margin-bottom: 12px;
+}

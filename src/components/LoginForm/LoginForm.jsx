@@ -1,14 +1,16 @@
-import { NavLink } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { Input, Button } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
+// import { Input, Button } from "@chakra-ui/react";
 
+import noIcon from "../../assets/no-icon.svg";
+import okIcon from "../../assets/ok-icon.svg";
+import Button from "../Button/Button";
+import Icon from "../Icon/Icon";
 import css from "./LoginForm.module.css";
-// import Modal from '../Modal/Modal';
-// import Button from "../Button/Button";
-import Form from "../Form/Form";
+// import Form from "../Form/Form";
 // import Input from "../Input/Input";
-import Label from "../Label/Label";
-import PairLabelInput from "../PairLabelInput/PairLabelInput";
+// import Label from "../Label/Label";
+// import PairLabelInput from "../PairLabelInput/PairLabelInput";
 
 import { logIn } from "../../redux/auth/operation";
 
@@ -30,19 +32,43 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form className={css.form} onSubmit={handleSubmit}>
-        <PairLabelInput>
-          <Label htmlFor='email'>Email</Label>
-          <Input type='email' id='email' name='email'></Input>
-        </PairLabelInput>
-        <PairLabelInput>
-          <Label htmlFor='password'>Password</Label>
-          <Input type='password' id='password' name='password'></Input>
-        </PairLabelInput>
-        <div className={css.buttons}>
-          <Button type='submit'>Log in</Button>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.pair}>
+          <label className={css.label} htmlFor='email'>
+            Email
+          </label>
+          <input
+            className={css.input}
+            type='email'
+            id='email'
+            name='email'></input>
         </div>
-      </Form>
+        <div className={css.pair}>
+          <label className={css.label} htmlFor='password'>
+            Password
+          </label>
+          <input
+            className={css.input}
+            type='password'
+            id='password'
+            name='password'></input>
+        </div>
+        {/* <div className={css.buttons}>
+          <Button type='submit'>Log in</Button>
+        </div> */}
+        <div className={css.buttons}>
+          <NavLink className={css.link} to='/'>
+            <Button className={css.button}>
+              <Icon src={noIcon} size='24' />
+              Cancel
+            </Button>
+          </NavLink>
+          <Button className={css.button} type='submit'>
+            <Icon src={okIcon} size='24' />
+            Login
+          </Button>
+        </div>
+      </form>
       <div>
         <p>
           If you do not have an account yet, click{" "}

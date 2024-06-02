@@ -1,0 +1,40 @@
+.form {
+  padding: 12px 0;
+  margin-bottom: 12px;
+  border-bottom: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pair {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.label {
+  width: 25%;
+  padding: 2px 0;
+}
+
+.input {
+  width: 100%;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin-top: 12px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

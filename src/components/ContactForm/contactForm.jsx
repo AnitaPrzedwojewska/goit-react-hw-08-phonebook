@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import css from "./ContactForm.module.css";
 import noIcon from "../../assets/no-icon.svg";
 import okIcon from "../../assets/ok-icon.svg";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
-import css from "./ContactForm.module.css";
 
 import { addContact, editContact } from "../../redux/contacts/operation";
 import { getContacts } from "../../redux/contacts/selectors";
@@ -17,9 +17,9 @@ const ContactForm = () => {
   const { contacts } = useSelector(getContacts);
   const { editing } = useSelector(getStatusApp);
 
-  const currentContact = editing ? contacts.find(
-      (contact) => contact.id === editing
-    ) : { id: null, name: '', number: '' };
+  const currentContact = editing
+    ? contacts.find((contact) => contact.id === editing)
+    : { id: null, name: "", number: "" };
 
   const [name, setName] = useState(currentContact.name);
   const [number, setNumber] = useState(currentContact.number);
@@ -35,8 +35,7 @@ const ContactForm = () => {
         editContact({ id: currentContact.id, name: name, number: number })
       );
       dispatch(setEditing(null));
-    }
-    else {
+    } else {
       const existContact = contacts.find(
         (contact) => contact.name.toLowerCase() === name.toLowerCase()
       );
@@ -52,6 +51,7 @@ const ContactForm = () => {
 
   const handleCancel = () => {
     dispatch(setAdding(false));
+    dispatch(setEditing(false));
   };
 
   return (
@@ -74,7 +74,7 @@ const ContactForm = () => {
       </div>
       <div className={css.pair}>
         <label className={css.label} htmlFor='number'>
-          Phone number:
+          Number:
         </label>
         <input
           className={css.input}
@@ -89,19 +89,13 @@ const ContactForm = () => {
         />
       </div>
       <div className={css.buttons}>
-        {editing ?
-          <Button className={css.button} type='submit'>
-            <Icon src={okIcon} size='24' />
-            Save
-          </Button>
-          :
-          <Button className={css.button} type='submit'>
-            <Icon src={okIcon} size='24' />
-            Add
-          </Button>}
         <Button className={css.button} onClick={handleCancel}>
           <Icon src={noIcon} size='24' />
           Cancel
+        </Button>
+        <Button className={css.button} type='submit'>
+          <Icon src={okIcon} size='24' />
+        {editing ? 'Save' : 'Add'}
         </Button>
       </div>
     </form>
